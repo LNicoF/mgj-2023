@@ -3,12 +3,12 @@ extends KinematicBody2D
 const SPEED = 10000
 var velocity := Vector2()
 
-func plain2Iso( plainVec: Vector2 ) -> Vector2 :
-    return plainVec * Vector2( 1, .75 )
+onready var _animation_player = $AnimationPlayer
 
 func _physics_process(delta):
     velocity = _move() * delta
     velocity = move_and_slide( velocity )
+    _animate()
 
 func _move() -> Vector2 :
     var goRight := Input.is_physical_key_pressed( KEY_D )
@@ -17,7 +17,12 @@ func _move() -> Vector2 :
     var goDown  := Input.is_physical_key_pressed( KEY_S )
     var xDir := int( goRight ) - int( goLeft )
     var yDir := int( goDown )  - int( goUp )
-    return plain2Iso( Vector2( xDir, yDir ).normalized() * SPEED )
+    var res = Vector2( xDir, yDir ).normalized() * SPEED
+    return Isometric.calcVec( res )
 
-func getRelativeZ( rPosition: Vector2 ) -> int :
-    return z_index + int( sign( position.y - rPosition.y ) ) ;
+func _animate() :
+    if velocity == Vector2() :
+        _animation_player.stopMoving()
+    else :
+        _animation_player.startMoving()
+
