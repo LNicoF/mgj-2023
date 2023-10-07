@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/main/Tree.gd" type="Script" id=2]
+
+[sub_resource type="Gradient" id=1]
+
+[sub_resource type="GradientTexture2D" id=2]
+gradient = SubResource( 1 )
+width = 1020
+height = 600
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0.284916 )
+colors = PoolColorArray( 0.425781, 0.283993, 0.0133057, 1 )
+
+[sub_resource type="GradientTexture2D" id=4]
+gradient = SubResource( 3 )
+width = 32
+
+[node name="Main" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 458, 273 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 510, 300 )
+z_index = -999
+texture = SubResource( 2 )
+region_rect = Rect2( 0, 0, 1020, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Tree" type="StaticBody2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
+position = Vector2( 309, 195 )
+shape = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Tree"]
+position = Vector2( 309, 179 )
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true
+}
