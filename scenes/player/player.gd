@@ -3,7 +3,7 @@ extends KinematicBody2D
 const SPEED = 10000
 var velocity := Vector2()
 
-onready var _animation_player = $AnimationPlayer
+onready var _animation_player = $AnimationpELUCAr
 
 func _physics_process(delta):
 	velocity = _move() * delta

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -183,7 +183,7 @@ tracks/8/keys = {
 [sub_resource type="Animation" id=4]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Skeleton2D/Head:position")
+tracks/0/path = NodePath("Skeleton2D/Body/Head:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -193,162 +193,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -49.6 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Skeleton2D/Head/PeluHead:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 4 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Skeleton2D/Body:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1.007, 0.925 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Skeleton2D/Hand1:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 105, -30 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Skeleton2D/RotorMoto/Hand2:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -99, -32 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("Skeleton2D/Head/Hair:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Skeleton2D/Head/Hair:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 32, -120 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("Skeleton2D/Head/Hair:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("Skeleton2D/Body:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 1 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("Skeleton2D/Hand1:rotation_degrees")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/10/type = "value"
-tracks/10/path = NodePath("Skeleton2D/Hand1:scale")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/11/type = "value"
-tracks/11/path = NodePath("Skeleton2D/RotorMoto/Hand2:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 11.8302 ]
-}
-tracks/12/type = "value"
-tracks/12/path = NodePath("Skeleton2D/RotorMoto/Hand2:scale")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/13/type = "value"
-tracks/13/path = NodePath("Skeleton2D/RotorMoto/Hand2/PeluMoto:texture")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ ExtResource( 7 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -500,35 +344,6 @@ tracks/11/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "move"
-length = 0.5
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Skeleton2D/Head:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
-"transitions": PoolRealArray( 1, 0.637281, 1 ),
-"update": 0,
-"values": [ Vector2( 0, -49.6 ), Vector2( 0, -30.6 ), Vector2( 0, -49.6 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Skeleton2D/Head/PeluHead:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ ExtResource( 4 ) ]
-}
-
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -549,8 +364,8 @@ rotation = -1.02064
 rest = Transform2D( 0.59541, -0.803422, 0.803422, 0.59541, -10, -90 )
 
 [node name="Hand2" type="Bone2D" parent="Skeleton2D/RotorMoto"]
-position = Vector2( -99, -32 )
-rotation = 0.206475
+position = Vector2( -76.9586, -112.242 )
+rotation = 0.933158
 rest = Transform2D( 0.97876, 0.205011, -0.205011, 0.97876, -99, -32 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/RotorMoto/Hand2"]
@@ -563,7 +378,7 @@ texture = ExtResource( 7 )
 
 [node name="Body" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 0, 1 )
-scale = Vector2( 1.007, 0.925 )
+scale = Vector2( 1.06011, 0.939086 )
 rest = Transform2D( 1.007, 0, 0, 0.925, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Skeleton2D/Body"]
@@ -571,7 +386,7 @@ position = Vector2( 2, -29 )
 texture = ExtResource( 2 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 0, -49.6 )
+position = Vector2( 18.4206, -65.3649 )
 rest = Transform2D( 1, 0, 0, 1, 0, -49.6 )
 
 [node name="PeluHead" type="Sprite" parent="Skeleton2D/Head"]
@@ -579,7 +394,8 @@ position = Vector2( -10, -93 )
 texture = ExtResource( 4 )
 
 [node name="Hair" type="Bone2D" parent="Skeleton2D/Head"]
-position = Vector2( 32, -120 )
+position = Vector2( 32.2212, -119.115 )
+scale = Vector2( 1.00531, 0.99469 )
 rest = Transform2D( 1, 0, 0, 1, 32, -120 )
 
 [node name="PeliHair" type="Sprite" parent="Skeleton2D/Head/Hair"]
@@ -587,7 +403,7 @@ position = Vector2( -26, -22 )
 texture = ExtResource( 8 )
 
 [node name="Hand1" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 105, -30 )
+position = Vector2( 103.611, -24.4434 )
 rest = Transform2D( 1, 0, 0, 1, 105, -30 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/Hand1"]
@@ -608,7 +424,4 @@ anims/Attack = SubResource( 8 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 4 )
 anims/Walk = SubResource( 7 )
-anims/move = SubResource( 5 )
 script = ExtResource( 5 )
-
-[node name="Spawners" type="Node2D" parent="."]

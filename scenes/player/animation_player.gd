@@ -1,8 +1,12 @@
 extends AnimationPlayer
 
+func _ready():
+    play( "Idle" )
+
 func startMoving() :
-    if current_animation == "" :
-        play( "move" )
+    if current_animation == "Idle" :
+        play( "Walk" )
 
 func stopMoving() :
-    play( "RESET" )
+    if current_animation == "Walk" :
+        play( "Idle" )
