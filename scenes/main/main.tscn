@@ -67,5 +67,5 @@ offset = Vector2( 1252, 626 )
 position = Vector2( 230, 261 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 458, 273 )
+position = Vector2( 142, -156 )
 scale = Vector2( 0.5, 0.5 )
