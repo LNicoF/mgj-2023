@@ -9,7 +9,7 @@
 script/source = "extends ParallaxLayer
 
 func _ready():
-    print( $Background2.texture.get_size() )
+	print( $Background2.texture.get_size() )
 "
 
 [node name="Main" type="Node2D"]
@@ -61,10 +61,23 @@ texture = ExtResource( 4 )
 centered = false
 offset = Vector2( 1252, 626 )
 
+[node name="Background8" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 1878, 0 )
+
+[node name="Background9" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+z_index = -1
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 1878, 626 )
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Enemy" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 230, 261 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 458, 273 )
