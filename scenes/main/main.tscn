@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy/enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://preview_4.jpg" type="Texture" id=3]
 [ext_resource path="res://isometric-grid-paper-seamless-pattern-square-grid-background-vector-illustration_175838-1051.jpg" type="Texture" id=4]
+[ext_resource path="res://scenes/main/main.gd" type="Script" id=5]
+[ext_resource path="res://scenes/enemy_spawner/enemy_spawner.tscn" type="PackedScene" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends ParallaxLayer
@@ -13,6 +15,7 @@ func _ready():
 "
 
 [node name="Main" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Background" type="Sprite" parent="."]
 visible = false
@@ -82,3 +85,9 @@ scale = Vector2( 0.5, 0.5 )
 [node name="Player" parent="YSort" instance=ExtResource( 1 )]
 position = Vector2( 735, 419 )
 scale = Vector2( 0.5, 0.5 )
+
+[node name="Spawners" type="Node2D" parent="YSort/Player"]
+
+[node name="Spawner" parent="YSort/Player/Spawners" instance=ExtResource( 6 )]
+
+[connection signal="timeout" from="YSort/Player/Spawners/Spawner" to="." method="_on_Spawner_timeout"]

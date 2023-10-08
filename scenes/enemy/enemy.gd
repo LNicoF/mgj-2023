@@ -11,6 +11,8 @@ func _physics_process( delta ):
 
 func _move() -> Vector2 :
 	var dist = _player.position - position
+	if ( dist.y < 1 ) :
+		dist.y = 0
 	var dir = Vector2( sign( dist.x ), sign( dist.y ) )
 	dir = dir.normalized()
 	return Isometric.calcVec( dir.normalized() * speed )

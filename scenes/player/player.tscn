@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -344,6 +344,9 @@ tracks/11/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.662745, 0.227451, 0.227451, 1 )
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
@@ -364,8 +367,8 @@ rotation = -1.02064
 rest = Transform2D( 0.59541, -0.803422, 0.803422, 0.59541, -10, -90 )
 
 [node name="Hand2" type="Bone2D" parent="Skeleton2D/RotorMoto"]
-position = Vector2( -76.9586, -112.242 )
-rotation = 0.933158
+position = Vector2( -99, -32 )
+rotation = 1.22316
 rest = Transform2D( 0.97876, 0.205011, -0.205011, 0.97876, -99, -32 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/RotorMoto/Hand2"]
@@ -378,7 +381,6 @@ texture = ExtResource( 7 )
 
 [node name="Body" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 0, 1 )
-scale = Vector2( 1.06011, 0.939086 )
 rest = Transform2D( 1.007, 0, 0, 0.925, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Skeleton2D/Body"]
@@ -386,7 +388,7 @@ position = Vector2( 2, -29 )
 texture = ExtResource( 2 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 18.4206, -65.3649 )
+position = Vector2( 18.7213, -67.7704 )
 rest = Transform2D( 1, 0, 0, 1, 0, -49.6 )
 
 [node name="PeluHead" type="Sprite" parent="Skeleton2D/Head"]
@@ -394,8 +396,8 @@ position = Vector2( -10, -93 )
 texture = ExtResource( 4 )
 
 [node name="Hair" type="Bone2D" parent="Skeleton2D/Head"]
-position = Vector2( 32.2212, -119.115 )
-scale = Vector2( 1.00531, 0.99469 )
+position = Vector2( 32.4553, -118.179 )
+scale = Vector2( 1.01093, 0.989073 )
 rest = Transform2D( 1, 0, 0, 1, 32, -120 )
 
 [node name="PeliHair" type="Sprite" parent="Skeleton2D/Head/Hair"]
@@ -403,7 +405,7 @@ position = Vector2( -26, -22 )
 texture = ExtResource( 8 )
 
 [node name="Hand1" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 103.611, -24.4434 )
+position = Vector2( 105, -30 )
 rest = Transform2D( 1, 0, 0, 1, 105, -30 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/Hand1"]
@@ -424,4 +426,19 @@ anims/Attack = SubResource( 8 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 4 )
 anims/Walk = SubResource( 7 )
+next/Attack = "Idle"
+blend_times = [ "Attack", "Attack", 0.5, "Attack", "Idle", 0.5, "Attack", "RESET", 0.5, "Attack", "Walk", 0.5 ]
 script = ExtResource( 5 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = -64.0
+margin_right = 544.0
+margin_bottom = -32.0
+custom_styles/fg = SubResource( 9 )
+value = 50.0
+rounded = true
