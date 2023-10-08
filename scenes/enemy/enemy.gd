@@ -14,6 +14,7 @@ onready var health := initialHealth
 
 var velocity := Vector2()
 var isSwitching := false
+var isDead := false
 var isAlly := false
 
 func _ready():
@@ -28,7 +29,7 @@ func _physics_process( delta ):
 		_inffluenceBar.value = 100 - _inffluenceTimer.time_left * 100 / _inffluenceTimer.wait_time
 
 func _move() -> Vector2 :
-	if isSwitching :
+	if isSwitching or isDead :
 		return Vector2()
 	var target := _getTarget()
 	var dist = target.position - position
@@ -43,7 +44,7 @@ func _move() -> Vector2 :
 	return Isometric.calcVec( dist.normalized() * speed )
 
 func hit( damage: int ) -> void :
-	if isSwitching :
+	if isSwitching or isDead :
 		return
 	_setHealth( health - damage )
 	_knockback()
@@ -54,7 +55,8 @@ func _knockback() :
 	move_and_slide( dist * -15 )
 
 func kill() -> void :
-	queue_free()
+	_animation_player.play( "Pela_die" )
+	isDead = true
 
 func _getTarget() -> Node2D :
 	return _player
@@ -75,10 +77,10 @@ func _on_InffluenceTimer_timeout():
 	_animation_player.play( "Pela_Meta" )
 	isSwitching = true
 
-
-
 func _on_AnimationPlayer_animation_finished(anim_name:String):
 	if anim_name == "Pela_Meta" :
 		isSwitching = false
 		isAlly = true
 		_animation_player.play( "Pela_Walk" )
+	elif anim_name == "Pela_die" :
+		queue_free()
