@@ -88,7 +88,7 @@ func _setHealth( newHealth: int ) -> void :
 	_ui.setHealth( health )
 
 func kill() -> void :
-	get_tree().quit()
+	get_tree().change_scene( "res://scenes/GameOver.tscn")
 
 func _on_AttackTimer_timeout():
 	print( 'attacking' )
