@@ -17,10 +17,9 @@ func _physics_process( delta ):
 func _move() -> Vector2 :
 	var target := _getTarget()
 	var dist = target.position - position
-	if ( dist.y < 1 ) :
+	if ( dist.y < 1 and dist.y > -1 ) :
 		dist.y = 0
-	var dir = Vector2( sign( dist.x ), sign( dist.y ) ).normalized()
-	return Isometric.calcVec( dir.normalized() * speed )
+	return Isometric.calcVec( dist.normalized() * speed )
 
 func hit( damage: int ) -> void :
 	_setHealth( health - damage )
