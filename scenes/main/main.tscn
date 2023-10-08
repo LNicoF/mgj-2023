@@ -9,7 +9,7 @@
 script/source = "extends ParallaxLayer
 
 func _ready():
-	print( $Background2.texture.get_size() )
+    print( $Background2.texture.get_size() )
 "
 
 [node name="Main" type="Node2D"]
