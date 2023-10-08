@@ -38,9 +38,12 @@ func _move() -> Vector2 :
 	if isSwitching or isDead or isAttacking() :
 		return Vector2()
 	var target := _getTarget()
-	var dist = target.position - position
-	if isAlly :
+	
+	var dist = Vector2( 1, 1 )
+	if target == null :
+		target = _player
 		dist *= -1
+	dist *= target.position - position
 
 	if sign( dist.x ) == sign( _sprite.scale.x ) and dist.x != 0 :
 		_sprite.scale.x *= -1
@@ -49,15 +52,14 @@ func _move() -> Vector2 :
 		dist.y = 0
 	return Isometric.calcVec( dist.normalized() * speed )
 
-func hit( rDamage: int ) -> void :
+func hit( rDamage: int, rPosition: Vector2 ) -> void :
 	if isSwitching or isDead :
 		return
 	_setHealth( health - rDamage )
-	_knockback()
+	_knockback( rPosition )
 
-func _knockback() :
-	var target := _getTarget()
-	var dist = target.position - position
+func _knockback( rPosition: Vector2 ) :
+	var dist = rPosition - position
 	move_and_slide( dist * -15 )
 
 func kill() -> void :
@@ -65,7 +67,9 @@ func kill() -> void :
 	_animation_player.play( "Pela_die" )
 	$CollisionShape2D.disabled = true
 
-func _getTarget() -> Node2D :
+func _getTarget() -> Node :
+	if isAlly :
+		return _getClosestEnemy()
 	return _player
 
 func _setHealth( newHealth : int ) -> void :
@@ -75,10 +79,14 @@ func _setHealth( newHealth : int ) -> void :
 	_healthBar.value = health
 	
 func startInffluencing() :
+	if isAlly :
+		return
 	_inffluenceTimer.start()
 
 func stopInffluencing() :
 	_inffluenceTimer.stop()
+	if not isAlly :
+		_inffluenceBar.value = 0
 
 func _on_InffluenceTimer_timeout():
 	_animation_player.play( "Pela_Meta" )
@@ -97,15 +105,33 @@ func _on_HurtBox_body_entered( body:Node ):
 		_attack( body )
 
 func _attack( target: Node ) :
-	print( 'enemy attacking' )
-	target.hit( damage )
+	target.hit( damage, position )
 
 func _startAttack( target: Node ) :
 	if isDead :
 		return
 	if target == _getTarget() :
-		print( 'started attacking' )
 		_animation_player.play( "Pela_Attack" )
 
 func isAttacking() -> bool :
 	return _animation_player.current_animation == "Pela_Attack"
+
+var _lastTarget : Node = null
+
+func _getClosestEnemy() -> Node :
+	if _lastTarget == null or _lastTarget.isDead :
+		_lastTarget = _findNewEnemy()
+	return _lastTarget
+
+func _findNewEnemy() -> Node : # https://ask.godotengine.org/89680/how-get-the-node-closest-to-my-position
+	var target_group = get_tree().get_nodes_in_group( 'enemies' )
+	var distance_away = global_transform.origin.distance_to(target_group[1].global_transform.origin)
+	var return_node = target_group[1]
+	for index in target_group.size():
+		var distance = global_transform.origin.distance_to(target_group[index].global_transform.origin)
+		if distance < distance_away and distance != 0 and not return_node.isAlly:
+			distance_away = distance
+			return_node = target_group[index]
+	if return_node.isAlly :
+		return null
+	return return_node

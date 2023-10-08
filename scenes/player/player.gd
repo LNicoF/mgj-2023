@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var _ui := $UI
 onready var _animation_player := $AnimationpELUCAr
 onready var _chainsaw := $Skeleton2D/RotorMoto
+onready var _blood := $Skeleton2D/RotorMoto/Hand2/ParticlesBlood
 onready var _chainsawArea := $Skeleton2D/RotorMoto/Hand2/Area2D
 onready var _sprite := $Skeleton2D
 onready var _attackTimer := $AttackTimer
@@ -25,7 +26,7 @@ func _input( event: InputEvent ):
 	if event is InputEventMouseButton :
 		if event.pressed and event.button_index == BUTTON_RIGHT :
 			print( 'hit' )
-			hit( 10 )
+			hit( 10, position )
 
 func _physics_process(delta):
 	velocity = _move()
@@ -37,14 +38,21 @@ func _attack():
 	isAttacking = Input.is_action_pressed( "attack" )
 	_animate()
 	if isAttacking :
-		_chainsaw.look_at( get_global_mouse_position() )
-		_chainsaw.rotation_degrees += 121
+		_aim()
+		_blood.emitting = not _chainsawArea.get_overlapping_bodies().empty()
 		if _attackTimer.is_stopped() :
 			_attackTimer.start()
 			_on_AttackTimer_timeout()
 	else :
 		_attackTimer.stop()
 		
+func _aim() :
+	var distance = _chainsaw.position - get_local_mouse_position()
+	if sign( distance.x ) != sign( _sprite.scale.x ) and distance.x != 0 :
+		_sprite.scale.x *= -1
+	_chainsaw.look_at( get_global_mouse_position() )
+	_chainsaw.rotation_degrees += 121
+
 
 func _move() -> Vector2 :
 	var goRight := Input.is_action_pressed( "move_right" )
@@ -69,7 +77,7 @@ func _animate() :
 	else :
 		_animation_player.startMoving()
 
-func hit( rDamage: int ) -> void :
+func hit( rDamage: int, _rPosition: Vector2 ) -> void :
 	_setHealth( health - rDamage )
 
 func _setHealth( newHealth: int ) -> void :
@@ -87,7 +95,7 @@ func _on_AttackTimer_timeout():
 		return
 	for body in _chainsawArea.get_overlapping_bodies() :
 		if 'enemy' in body.filename and not body.isAlly :
-			body.hit( damage )
+			body.hit( damage, position )
 
 func _on_Inffluence_body_entered(body:Node):
 	print( 'enter' )

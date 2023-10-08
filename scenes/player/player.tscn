@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/player/Pelu_Talk.png" type="Texture" id=10]
 [ext_resource path="res://assets/player/Pelu_Blink.png" type="Texture" id=11]
 [ext_resource path="res://assets/player/Bla.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/Blood.png" type="Texture" id=13]
 
 [sub_resource type="CircleShape2D" id=3]
 custom_solver_bias = 1.0
@@ -23,6 +24,40 @@ extents = Vector2( 32.058, 105.153 )
 [sub_resource type="GDScript" id=11]
 script/source = "extends Sprite
 "
+
+[sub_resource type="Gradient" id=24]
+offsets = PoolRealArray( 0, 0.677419 )
+colors = PoolColorArray( 0.636719, 0.636719, 0.636719, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=25]
+gradient = SubResource( 24 )
+
+[sub_resource type="Curve" id=18]
+bake_resolution = 50
+_data = [ Vector2( 0, 0.390909 ), 0.0, 1.70335, 0, 0, Vector2( 1, 0.0545454 ), -1.65961, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=19]
+curve = SubResource( 18 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 33.0
+flag_disable_z = true
+direction = Vector3( 0, -0.5, 0 )
+spread = 52.91
+gravity = Vector3( 0, 150, 0 )
+initial_velocity = 333.0
+initial_velocity_random = 0.5
+angular_velocity = 10.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 90.0
+angle_random = 1.0
+scale_random = 1.0
+scale_curve = SubResource( 19 )
+color_ramp = SubResource( 25 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "Attack"
@@ -620,7 +655,7 @@ _data = [ Vector2( 0.0280899, 0.141165 ), 0.0, 2.00878, 0, 0, Vector2( 1, 1 ), 0
 [sub_resource type="CurveTexture" id=16]
 curve = SubResource( 15 )
 
-[sub_resource type="ParticlesMaterial" id=17]
+[sub_resource type="ParticlesMaterial" id=21]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 34.42
@@ -646,13 +681,13 @@ func setHealth( health: int ) -> void :
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.662745, 0.227451, 0.227451, 1 )
 
-[sub_resource type="Gradient" id=18]
+[sub_resource type="Gradient" id=22]
 interpolation_mode = 2
 offsets = PoolRealArray( 0.642458, 0.687151 )
 colors = PoolColorArray( 0.909804, 0.921569, 0.545098, 0.137255, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture2D" id=19]
-gradient = SubResource( 18 )
+[sub_resource type="GradientTexture2D" id=23]
+gradient = SubResource( 22 )
 fill = 1
 fill_from = Vector2( 0.5, 0.5 )
 
@@ -697,6 +732,19 @@ script = SubResource( 11 )
 position = Vector2( -99.6814, -27.1406 )
 rotation = 0.108417
 texture = ExtResource( 7 )
+
+[node name="ParticlesBlood" type="Particles2D" parent="Skeleton2D/RotorMoto/Hand2"]
+position = Vector2( -223.725, -27.4957 )
+rotation = 0.932221
+emitting = false
+amount = 100
+lifetime = 2.0
+speed_scale = 3.0
+process_material = SubResource( 17 )
+texture = ExtResource( 13 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="Body" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 0, 1 )
@@ -766,7 +814,7 @@ anims/Talk = SubResource( 14 )
 position = Vector2( -48, -70 )
 amount = 3
 lifetime = 2.0
-process_material = SubResource( 17 )
+process_material = SubResource( 21 )
 texture = ExtResource( 12 )
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -792,7 +840,7 @@ z_as_relative = false
 
 [node name="Sprite" type="Sprite" parent="Inffluence"]
 scale = Vector2( 16, 8 )
-texture = SubResource( 19 )
+texture = SubResource( 23 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Inffluence"]
 rotation = 1.5708
