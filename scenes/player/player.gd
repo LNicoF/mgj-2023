@@ -12,6 +12,7 @@ export( int ) var max_health := 100
 export( int ) var speed := 20000
 
 onready var health := max_health
+onready var _chainsaw_rotation = _chainsaw.rotation
 
 func _ready():
 	_sprite.scale.x *= -1
@@ -33,7 +34,11 @@ func _attack():
 	isAttacking = Input.is_action_pressed( "attack" )
 	_animate()
 	if isAttacking :
-		_chainsaw.look_at( get_local_mouse_position() )
+		_chainsaw.look_at( get_global_mouse_position() )
+		_chainsaw.rotation_degrees += 121
+	else :
+		_chainsaw_rotation = _chainsaw.rotation
+		
 
 func _move() -> Vector2 :
 	var goRight := Input.is_action_pressed( "move_right" )
