@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/player/Pelu_moto2.png" type="Texture" id=9]
 [ext_resource path="res://assets/player/Pelu_Talk.png" type="Texture" id=10]
 [ext_resource path="res://assets/player/Pelu_Blink.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/Bla.png" type="Texture" id=12]
 
 [sub_resource type="CircleShape2D" id=3]
 custom_solver_bias = 1.0
@@ -591,6 +592,26 @@ tracks/1/keys = {
 "values": [ false, true, false ]
 }
 
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0.0280899, 0.141165 ), 0.0, 2.00878, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 34.42
+gravity = Vector3( 0, 150, 0 )
+initial_velocity = 327.88
+initial_velocity_random = 0.2
+angular_velocity = -20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 22.0
+scale_random = 1.0
+scale_curve = SubResource( 16 )
+
 [sub_resource type="GDScript" id=10]
 script/source = "extends CanvasLayer
 
@@ -701,6 +722,13 @@ script = ExtResource( 5 )
 [node name="AnimationBlink" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 13 )
 anims/Talk = SubResource( 14 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( -48, -70 )
+amount = 3
+lifetime = 2.0
+process_material = SubResource( 17 )
+texture = ExtResource( 12 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = SubResource( 10 )
