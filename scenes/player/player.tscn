@@ -353,7 +353,7 @@ tracks/13/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "Walk"
-length = 1.4
+length = 1.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Skeleton2D/Body:position")
@@ -509,7 +509,8 @@ zoom = Vector2( 0.75, 0.75 )
 smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2( 1, -21 )
+scale = Vector2( 1.36, 1 )
 shape = SubResource( 3 )
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
