@@ -55,8 +55,9 @@ func _knockback() :
 	move_and_slide( dist * -15 )
 
 func kill() -> void :
-	_animation_player.play( "Pela_die" )
 	isDead = true
+	_animation_player.play( "Pela_die" )
+	$CollisionShape2D.disabled = true
 
 func _getTarget() -> Node2D :
 	return _player
