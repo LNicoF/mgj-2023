@@ -6,9 +6,12 @@ onready var _player : Node2D = get_node( '../Player' ) ;
 onready var _healthBar := $HealthBar
 onready var _inffluenceBar := $InffluenceBar
 onready var _inffluenceTimer := $InffluenceTimer
+onready var _attackZone := $AttackRange
 
-export( int ) var initialHealth := 20
-export( int ) var speed = 5000
+export( int ) var initialHealth := 100
+export( int ) var speed := 100
+export( int ) var damage := 10
+export( int ) var attackRange := 128
 
 onready var health := initialHealth
 
@@ -18,18 +21,21 @@ var isDead := false
 var isAlly := false
 
 func _ready():
+	$AttackRange/CollisionShape2D.shape.radius = attackRange
 	_animation_player.play( "Pela_Walk" )
 	_inffluenceBar.value = 0
 	_setHealth( health )
 
 func _physics_process( delta ):
-	velocity = _move() * delta
+	velocity = _move()
 	velocity = move_and_slide( velocity )
+	if _getTarget() in _attackZone.get_overlapping_bodies() :
+		_startAttack( _getTarget() )
 	if not _inffluenceTimer.is_stopped() :
 		_inffluenceBar.value = 100 - _inffluenceTimer.time_left * 100 / _inffluenceTimer.wait_time
 
 func _move() -> Vector2 :
-	if isSwitching or isDead :
+	if isSwitching or isDead or isAttacking() :
 		return Vector2()
 	var target := _getTarget()
 	var dist = target.position - position
@@ -43,10 +49,10 @@ func _move() -> Vector2 :
 		dist.y = 0
 	return Isometric.calcVec( dist.normalized() * speed )
 
-func hit( damage: int ) -> void :
+func hit( rDamage: int ) -> void :
 	if isSwitching or isDead :
 		return
-	_setHealth( health - damage )
+	_setHealth( health - rDamage )
 	_knockback()
 
 func _knockback() :
@@ -85,3 +91,21 @@ func _on_AnimationPlayer_animation_finished(anim_name:String):
 		_animation_player.play( "Pela_Walk" )
 	elif anim_name == "Pela_die" :
 		queue_free()
+
+func _on_HurtBox_body_entered( body:Node ):
+	if body == _getTarget() :
+		_attack( body )
+
+func _attack( target: Node ) :
+	print( 'enemy attacking' )
+	target.hit( damage )
+
+func _startAttack( target: Node ) :
+	if isDead :
+		return
+	if target == _getTarget() :
+		print( 'started attacking' )
+		_animation_player.play( "Pela_Attack" )
+
+func isAttacking() -> bool :
+	return _animation_player.current_animation == "Pela_Attack"

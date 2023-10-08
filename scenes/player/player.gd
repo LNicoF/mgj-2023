@@ -11,7 +11,7 @@ var velocity := Vector2()
 var isAttacking := false
 
 export( int ) var max_health := 100
-export( int ) var speed := 20000
+export( int ) var speed := 250
 export( int ) var damage := 10
 
 onready var health := max_health
@@ -28,7 +28,7 @@ func _input( event: InputEvent ):
 			hit( 10 )
 
 func _physics_process(delta):
-	velocity = _move() * delta
+	velocity = _move()
 	velocity = move_and_slide( velocity )
 	_attack()
 	_animate()
