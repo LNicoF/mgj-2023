@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+onready var _ui := $UI
 onready var _animation_player := $AnimationpELUCAr
 onready var _sprite := $Skeleton2D
 
@@ -12,6 +13,7 @@ onready var health := max_health
 
 func _ready():
 	_sprite.scale.x *= -1
+	_ui.setHealth( health )
 
 func _physics_process(delta):
 	velocity = _move() * delta
@@ -28,8 +30,8 @@ func _move() -> Vector2 :
 	var yDir := int( goDown )  - int( goUp )
 	var res = Vector2( xDir, yDir ).normalized() * speed
 
-	# if xDir != _sprite.scale.x and xDir != 0 :
-	# 	_sprite.scale.x *= -1
+	if xDir == _sprite.scale.x and xDir != 0 :
+		_sprite.scale.x *= -1
 
 	return Isometric.calcVec( res )
 
@@ -42,5 +44,17 @@ func _animate() :
 func hit( damage: int ) -> void :
 	_setHealth( health - damage )
 
-func _setHealth( _newHealth: int ) -> void :
-	pass
+func _setHealth( newHealth: int ) -> void :
+	if newHealth <= 0 :
+		kill() ; return
+	health = newHealth
+	_ui.setHealth( health )
+
+func kill() -> void :
+	get_tree().quit()
+
+func _input( event: InputEvent ):
+	if event is InputEventMouseButton :
+		if event.pressed and event.button_index == BUTTON_RIGHT :
+			print( 'hit' )
+			hit( 10 )

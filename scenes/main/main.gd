@@ -2,7 +2,7 @@ extends Node2D
 
 const Enemy := preload( "res://scenes/enemy/enemy.tscn" )
 
-export( int ) var entityCap := 2
+export( int ) var entityCap := 20
 
 onready var entitiesContainer := $YSort ;
 onready var _enemyPrototype := $YSort/Enemy ;
