@@ -19,6 +19,7 @@ onready var health := max_health
 func _ready():
 	_sprite.scale.x *= -1
 	_ui.setHealth( health )
+	$AnimationBlink.play( "Talk" )
 
 func _input( event: InputEvent ):
 	if event is InputEventMouseButton :
@@ -85,5 +86,15 @@ func _on_AttackTimer_timeout():
 	if not isAttacking :
 		return
 	for body in _chainsawArea.get_overlapping_bodies() :
-		if 'enemy' in body.filename :
+		if 'enemy' in body.filename and not body.isAlly :
 			body.hit( damage )
+
+func _on_Inffluence_body_entered(body:Node):
+	print( 'enter' )
+	if 'enemy' in body.filename :
+		body.startInffluencing()
+
+func _on_Inffluence_body_exited(body:Node):
+	print( 'exit' )
+	if 'enemy' in body.filename :
+		body.stopInffluencing()

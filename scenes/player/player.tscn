@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -15,7 +15,7 @@
 
 [sub_resource type="CircleShape2D" id=3]
 custom_solver_bias = 1.0
-radius = 64.0
+radius = 72.0
 
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 32.058, 105.153 )
@@ -646,12 +646,26 @@ func setHealth( health: int ) -> void :
 [sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.662745, 0.227451, 0.227451, 1 )
 
+[sub_resource type="Gradient" id=18]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.642458, 0.687151 )
+colors = PoolColorArray( 0.909804, 0.921569, 0.545098, 0.137255, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture2D" id=19]
+gradient = SubResource( 18 )
+fill = 1
+fill_from = Vector2( 0.5, 0.5 )
+
+[sub_resource type="CapsuleShape2D" id=20]
+radius = 206.999
+height = 476.9
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, -21 )
-scale = Vector2( 1.36, 1 )
 shape = SubResource( 3 )
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
@@ -770,5 +784,20 @@ value = 50.0
 rounded = true
 
 [node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Inffluence" type="Area2D" parent="."]
+z_index = -999
+z_as_relative = false
+
+[node name="Sprite" type="Sprite" parent="Inffluence"]
+scale = Vector2( 16, 8 )
+texture = SubResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inffluence"]
+rotation = 1.5708
+shape = SubResource( 20 )
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="body_entered" from="Inffluence" to="." method="_on_Inffluence_body_entered"]
+[connection signal="body_exited" from="Inffluence" to="." method="_on_Inffluence_body_exited"]
