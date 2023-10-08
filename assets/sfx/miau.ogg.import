@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/miau.ogg-f0b9e2ef62290da94814cde3d3e2d7fd.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/miau.ogg"
+dest_files=[ "res://.import/miau.ogg-f0b9e2ef62290da94814cde3d3e2d7fd.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -21,6 +21,7 @@ func _ready():
 	_sprite.scale.x *= -1
 	_ui.setHealth( health )
 	$AnimationBlink.play( "Talk" )
+	$Blabla.play()
 
 func _input( event: InputEvent ):
 	if event is InputEventMouseButton :
@@ -37,9 +38,9 @@ func _physics_process(delta):
 func _attack():
 	isAttacking = Input.is_action_pressed( "attack" )
 	_animate()
+	_blood.emitting = isAttacking and not _chainsawArea.get_overlapping_bodies().empty()
 	if isAttacking :
 		_aim()
-		_blood.emitting = not _chainsawArea.get_overlapping_bodies().empty()
 		if _attackTimer.is_stopped() :
 			_attackTimer.start()
 			_on_AttackTimer_timeout()

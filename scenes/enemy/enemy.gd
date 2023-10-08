@@ -129,7 +129,7 @@ func _findNewEnemy() -> Node : # https://ask.godotengine.org/89680/how-get-the-n
 	var return_node = target_group[1]
 	for index in target_group.size():
 		var distance = global_transform.origin.distance_to(target_group[index].global_transform.origin)
-		if distance < distance_away and distance != 0 and not return_node.isAlly:
+		if distance < distance_away and distance != 0 and not return_node.is_queued_for_deletion() and not return_node.isAlly:
 			distance_away = distance
 			return_node = target_group[index]
 	if return_node.isAlly :

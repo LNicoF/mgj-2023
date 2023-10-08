@@ -53,7 +53,7 @@ smoothing_enabled = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -32.0
+volume_db = -20.639
 autoplay = true
 
 [connection signal="timeout" from="YSort/Player/Spawners/Spawner" to="." method="_on_Spawner_timeout"]
