@@ -3,9 +3,9 @@
 [ext_resource path="res://scenes/enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pela_head.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/Pelu_hand.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/Pela_body.png" type="Texture" id=4]
 [ext_resource path="res://assets/player/Pela_head_hit.png" type="Texture" id=5]
 [ext_resource path="res://assets/player/Pela_Wig.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=7]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 72.0
@@ -530,7 +530,7 @@ rest = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="PelaBody" type="Sprite" parent="Skeleton2D/Body"]
 position = Vector2( 1, -35 )
-texture = ExtResource( 4 )
+texture = ExtResource( 7 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 3.557, -84.6373 )
