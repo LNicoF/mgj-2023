@@ -4,11 +4,14 @@ onready var _player : Node2D = get_node( '../Player' ) ;
 onready var _healthBar := $HealthBar
 
 export( int ) var initialHealth := 20
+export( int ) var speed = 5000
 
 onready var health := initialHealth
 
-var speed = 5000
 var velocity := Vector2()
+
+func _ready():
+	_setHealth( health )
 
 func _physics_process( delta ):
 	velocity = _move() * delta

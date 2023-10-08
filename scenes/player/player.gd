@@ -3,16 +3,18 @@ extends KinematicBody2D
 onready var _ui := $UI
 onready var _animation_player := $AnimationpELUCAr
 onready var _chainsaw := $Skeleton2D/RotorMoto
+onready var _chainsawArea := $Skeleton2D/RotorMoto/Hand2/Area2D
 onready var _sprite := $Skeleton2D
+onready var _attackTimer := $AttackTimer
 
 var velocity := Vector2()
 var isAttacking := false
 
 export( int ) var max_health := 100
 export( int ) var speed := 20000
+export( int ) var damage := 10
 
 onready var health := max_health
-onready var _chainsaw_rotation = _chainsaw.rotation
 
 func _ready():
 	_sprite.scale.x *= -1
@@ -36,8 +38,11 @@ func _attack():
 	if isAttacking :
 		_chainsaw.look_at( get_global_mouse_position() )
 		_chainsaw.rotation_degrees += 121
+		if _attackTimer.is_stopped() :
+			_attackTimer.start()
+			_on_AttackTimer_timeout()
 	else :
-		_chainsaw_rotation = _chainsaw.rotation
+		_attackTimer.stop()
 		
 
 func _move() -> Vector2 :
@@ -63,8 +68,8 @@ func _animate() :
 	else :
 		_animation_player.startMoving()
 
-func hit( damage: int ) -> void :
-	_setHealth( health - damage )
+func hit( rDamage: int ) -> void :
+	_setHealth( health - rDamage )
 
 func _setHealth( newHealth: int ) -> void :
 	if newHealth <= 0 :
@@ -74,3 +79,11 @@ func _setHealth( newHealth: int ) -> void :
 
 func kill() -> void :
 	get_tree().quit()
+
+func _on_AttackTimer_timeout():
+	print( 'attacking' )
+	if not isAttacking :
+		return
+	for body in _chainsawArea.get_overlapping_bodies() :
+		if 'enemy' in body.filename :
+			body.hit( damage )
