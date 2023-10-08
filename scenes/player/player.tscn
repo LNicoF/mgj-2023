@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/player/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pelu_body.png" type="Texture" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://assets/player/Pelu_moto.png" type="Texture" id=7]
 [ext_resource path="res://assets/player/Peli_hair.png" type="Texture" id=8]
 [ext_resource path="res://assets/player/Pelu_moto2.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/Pelu_Talk.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/Pelu_Blink.png" type="Texture" id=11]
 
 [sub_resource type="CircleShape2D" id=3]
 custom_solver_bias = 1.0
@@ -354,6 +356,35 @@ tracks/13/keys = {
 "update": 0,
 "values": [ ExtResource( 7 ) ]
 }
+tracks/14/type = "value"
+tracks/14/path = NodePath("Skeleton2D/Head/PeluTalk:visible")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Talk"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Head/PeluTalk:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "Walk"
@@ -504,6 +535,62 @@ tracks/11/keys = {
 "values": [ Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Head/PeluTalk:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Head/PeluBlink:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "Talk"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Skeleton2D/Head/PeluTalk:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Skeleton2D/Head/PeluBlink:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.7, 2.9, 3.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
 [sub_resource type="GDScript" id=10]
 script/source = "extends CanvasLayer
 
@@ -567,6 +654,15 @@ rest = Transform2D( 1, 0, 0, 1, 18.7213, -67.7704 )
 position = Vector2( -10, -93 )
 texture = ExtResource( 4 )
 
+[node name="PeluBlink" type="Sprite" parent="Skeleton2D/Head"]
+visible = false
+position = Vector2( -43, -53.4 )
+texture = ExtResource( 11 )
+
+[node name="PeluTalk" type="Sprite" parent="Skeleton2D/Head"]
+position = Vector2( -14, 9.6 )
+texture = ExtResource( 10 )
+
 [node name="Hair" type="Bone2D" parent="Skeleton2D/Head"]
 position = Vector2( 32, -120 )
 rest = Transform2D( 1.01093, 0, 0, 0.989073, 32.4553, -118.179 )
@@ -596,10 +692,15 @@ __meta__ = {
 anims/Attack = SubResource( 8 )
 anims/Idle = SubResource( 6 )
 anims/RESET = SubResource( 4 )
+anims/Talk = SubResource( 12 )
 anims/Walk = SubResource( 7 )
 next/Attack = "Idle"
 blend_times = [ "Attack", "Attack", 0.5, "Attack", "Idle", 0.5, "Attack", "RESET", 0.5, "Attack", "Walk", 0.5 ]
 script = ExtResource( 5 )
+
+[node name="AnimationBlink" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/Talk = SubResource( 14 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = SubResource( 10 )
