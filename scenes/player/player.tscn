@@ -41,7 +41,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 53.466, 53.466 ]
+"values": [ 0.0, 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Skeleton2D/RotorMoto/Hand2:scale")
@@ -533,7 +533,7 @@ rest = Transform2D( 0.59541, -0.803422, 0.803422, 0.59541, -10, -90 )
 
 [node name="Hand2" type="Bone2D" parent="Skeleton2D/RotorMoto"]
 position = Vector2( -99, -32 )
-rotation = 1.22316
+rotation = 0.206476
 rest = Transform2D( 0.97876, 0.205011, -0.205011, 0.97876, -99, -32 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/RotorMoto/Hand2"]
@@ -546,6 +546,7 @@ texture = ExtResource( 7 )
 
 [node name="Body" type="Bone2D" parent="Skeleton2D"]
 position = Vector2( 0, 1 )
+scale = Vector2( 1.007, 0.925 )
 rest = Transform2D( 1.007, 0, 0, 0.925, 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="Skeleton2D/Body"]
@@ -553,7 +554,7 @@ position = Vector2( 2, -29 )
 texture = ExtResource( 2 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 18.7213, -67.7704 )
+position = Vector2( 0, -49.6 )
 rest = Transform2D( 1, 0, 0, 1, 0, -49.6 )
 
 [node name="PeluHead" type="Sprite" parent="Skeleton2D/Head"]
@@ -561,8 +562,7 @@ position = Vector2( -10, -93 )
 texture = ExtResource( 4 )
 
 [node name="Hair" type="Bone2D" parent="Skeleton2D/Head"]
-position = Vector2( 32.4553, -118.179 )
-scale = Vector2( 1.01093, 0.989073 )
+position = Vector2( 32, -120 )
 rest = Transform2D( 1, 0, 0, 1, 32, -120 )
 
 [node name="PeliHair" type="Sprite" parent="Skeleton2D/Head/Hair"]
