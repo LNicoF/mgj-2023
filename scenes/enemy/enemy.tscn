@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/enemy/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/Pela_head.png" type="Texture" id=2]
@@ -198,11 +198,8 @@ tracks/3/keys = {
 "values": [ Vector2( 0.201911, 0.194573 ), Vector2( 1.00622, 0.969653 ), Vector2( 0.938185, 0.938185 ), Vector2( 0.938185, 0.938185 ), Vector2( 0.966066, 0.966066 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "Pela_Walk"
-
 [sub_resource type="Animation" id=9]
-resource_name = "Pela_Walk 2"
+resource_name = "Pela_Walk"
 length = 1.2
 loop = true
 step = 0.05
@@ -452,7 +449,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Skeleton2D/Head/Wig:position")
@@ -508,15 +505,14 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Pela_Attack = SubResource( 4 )
 anims/Pela_Meta = SubResource( 10 )
-anims/Pela_Walk = SubResource( 8 )
-"anims/Pela_Walk 2" = SubResource( 9 )
+anims/Pela_Walk = SubResource( 9 )
 anims/Pela_die = SubResource( 5 )
 anims/RESET = SubResource( 11 )
 
 [node name="Skeleton2D" type="Skeleton2D" parent="."]
 
 [node name="Hand2" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( -97, -40 )
+position = Vector2( -59.7062, -35.8588 )
 rest = Transform2D( 1, 0, 0, 1, -97, -40 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/Hand2"]
@@ -524,6 +520,8 @@ scale = Vector2( 0.882036, 0.882036 )
 texture = ExtResource( 3 )
 
 [node name="Body" type="Bone2D" parent="Skeleton2D"]
+position = Vector2( 1.09309, 0.218618 )
+scale = Vector2( 1.003, 0.993723 )
 rest = Transform2D( 1, 0, 0, 1, 0, 0 )
 
 [node name="PelaBody" type="Sprite" parent="Skeleton2D/Body"]
@@ -531,7 +529,7 @@ position = Vector2( 1, -35 )
 texture = ExtResource( 4 )
 
 [node name="Head" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 3.557, -84.6373 )
+position = Vector2( 3.44575, -84.044 )
 rest = Transform2D( 1, 0, 0, 1, 3.557, -84.6373 )
 
 [node name="PelaHead" type="Sprite" parent="Skeleton2D/Head"]
@@ -543,11 +541,12 @@ position = Vector2( 13.443, -137.363 )
 rest = Transform2D( 1, 0, 0, 1, 13.443, -137.363 )
 
 [node name="PelaWig" type="Sprite" parent="Skeleton2D/Head/Wig"]
+visible = false
 position = Vector2( 8, -10 )
 texture = ExtResource( 6 )
 
 [node name="Hand" type="Bone2D" parent="Skeleton2D"]
-position = Vector2( 98, -42 )
+position = Vector2( 50.8475, -28.8588 )
 rest = Transform2D( 1, 0, 0, 1, 98, -42 )
 
 [node name="PeluHand" type="Sprite" parent="Skeleton2D/Hand"]
